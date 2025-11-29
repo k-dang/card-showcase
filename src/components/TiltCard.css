@@ -1,0 +1,46 @@
+:root {
+  --card-radius: 4.55% / 3.5%;
+}
+
+.tilt-card {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transform: perspective(800px) rotateX(var(--rotateX, 0deg))
+    rotateY(var(--rotateY, 0deg)) translateZ(0);
+
+  backface-visibility: hidden;
+  will-change: transform;
+  transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1);
+  border-radius: var(--card-radius);
+}
+
+.tilt-card:hover {
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.tilt-card.tracking {
+  transition: none;
+}
+
+/* ✨ Shine layer */
+.tilt-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle at calc(var(--px, 0) * 100%) calc(var(--py, 0) * 100%),
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0) 40%
+  );
+
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.tilt-card:hover::before {
+  opacity: 1;
+}
