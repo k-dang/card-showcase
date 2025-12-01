@@ -1,0 +1,230 @@
+/* CSS Variables */
+:root {
+  --sunpillar-1: hsl(2, 100%, 73%);
+  --sunpillar-2: hsl(53, 100%, 69%);
+  --sunpillar-3: hsl(93, 100%, 69%);
+  --sunpillar-4: hsl(176, 100%, 76%);
+  --sunpillar-5: hsl(228, 100%, 74%);
+  --sunpillar-6: hsl(283, 100%, 73%);
+
+  --sunpillar-clr-1: var(--sunpillar-1);
+  --sunpillar-clr-2: var(--sunpillar-2);
+  --sunpillar-clr-3: var(--sunpillar-3);
+  --sunpillar-clr-4: var(--sunpillar-4);
+  --sunpillar-clr-5: var(--sunpillar-5);
+  --sunpillar-clr-6: var(--sunpillar-6);
+}
+
+.card {
+  --card-radius: 4.55% / 3.5%;
+}
+
+.card {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transform: perspective(800px)
+    translate3d(var(--translateX, 0px), var(--translateY, 0px), 0px)
+    scale(var(--card-scale, 1)) rotateX(var(--rotateX, 0deg))
+    rotateY(var(--rotateY, 0deg));
+
+  backface-visibility: hidden;
+  will-change: transform;
+  transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1);
+  border-radius: var(--card-radius);
+}
+
+/* Ensure card content is visible - effect layers will overlay and blend */
+.card > *:not(.card__shine):not(.card__glare):not(.card__grain) {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+}
+
+.card:hover {
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card.tracking {
+  transition: none;
+}
+
+/*  masking image */
+.card.masked .card__shine,
+.card.masked .card__shine:before,
+.card.masked .card__shine:after {
+  /** masking image for cards which are masked **/
+  -webkit-mask-image: var(--mask);
+  mask-image: var(--mask);
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-position: center center;
+  mask-position: center center;
+}
+
+/* ==========================================
+   BASE EFFECT LAYERS
+   ========================================== */
+
+.card__shine,
+.card__glare,
+.card__grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+.card__shine {
+  display: grid;
+  z-index: 2;
+  transform: translateZ(1px);
+  overflow: hidden;
+  background: transparent;
+  mix-blend-mode: color-dodge;
+  opacity: var(--card-opacity);
+}
+
+/* Base styles for shine pseudo-elements */
+.card__shine:before,
+.card__shine:after {
+  content: "";
+  grid-area: 1/1;
+  transform: translateZ(1px);
+  border-radius: var(--card-radius);
+}
+
+.card__shine:after {
+  transform: translateZ(1.2px);
+}
+
+.card__glare {
+  z-index: 3;
+  transform: translateZ(1.41px);
+  transition: opacity 0.2s ease-out;
+  will-change: opacity, background-image;
+}
+
+.card__grain {
+  z-index: 4;
+  transform: translateZ(1.5px);
+}
+
+/* ==========================================
+   VMAX HOLO EFFECTS
+   ========================================== */
+
+/* VMAX Shine Layer */
+.card:not(.masked)[data-rarity="rare holo vmax"] .card__shine,
+.card:not(.masked)[data-rarity="rare holo vmax"] .card__shine:after {
+  --mask: none;
+  --foil: url("/img/vmaxbg.jpg");
+  --imgsize: 60% 30%;
+}
+
+.card[data-rarity="rare holo vmax"] .card__shine {
+  --space: 6%;
+  --angle: 133deg;
+  --imgsize: cover;
+  background-image: var(--foil),
+    repeating-linear-gradient(
+      -33deg,
+      hsl(2, 70%, 47%) calc(var(--space) * 1),
+      hsl(228, 60%, 64%) calc(var(--space) * 2),
+      hsl(176, 55%, 39%) calc(var(--space) * 3),
+      hsl(123, 68%, 35%) calc(var(--space) * 4),
+      hsl(283, 75%, 57%) calc(var(--space) * 5),
+      hsl(2, 70%, 47%) calc(var(--space) * 6)
+    ),
+    repeating-linear-gradient(
+      var(--angle),
+      hsla(227, 53%, 12%, 0.5) 0%,
+      hsl(180, 10%, 50%) 2.5%,
+      hsl(83, 50%, 35%) 5%,
+      hsl(180, 10%, 50%) 7.5%,
+      hsla(227, 53%, 12%, 0.5) 10%,
+      hsla(227, 53%, 12%, 0.5) 15%
+    ),
+    radial-gradient(
+      farthest-corner circle at var(--pointer-x) var(--pointer-y),
+      hsla(189, 76%, 77%, 0.6) 0%,
+      hsla(147, 59%, 77%, 0.6) 25%,
+      hsla(271, 55%, 69%, 0.6) 50%,
+      hsla(355, 56%, 72%, 0.6) 75%
+    );
+  background-blend-mode: difference, luminosity, soft-light;
+  background-size: var(--imgsize), 1100% 1100%, 600% 600%, 200% 200%;
+  background-position: center, var(--background-x) var(--background-y),
+    var(--background-x) var(--background-y),
+    var(--background-x) var(--background-y);
+  filter: brightness(calc((var(--pointer-from-center) * 0.4) + 0.4)) contrast(2)
+    saturate(1);
+}
+
+.card[data-rarity="rare holo vmax"] .card__shine:after {
+  content: "";
+  background-image: repeating-linear-gradient(
+      0deg,
+      var(--sunpillar-clr-1) calc(var(--space) * 1),
+      var(--sunpillar-clr-2) calc(var(--space) * 2),
+      var(--sunpillar-clr-3) calc(var(--space) * 3),
+      var(--sunpillar-clr-4) calc(var(--space) * 4),
+      var(--sunpillar-clr-5) calc(var(--space) * 5),
+      var(--sunpillar-clr-6) calc(var(--space) * 6),
+      var(--sunpillar-clr-1) calc(var(--space) * 7)
+    ),
+    repeating-linear-gradient(
+      var(--angle),
+      #0e152e 0%,
+      hsl(180, 10%, 60%) 3.8%,
+      hsl(180, 29%, 66%) 4.5%,
+      hsl(180, 10%, 60%) 5.2%,
+      #0e152e 10%,
+      #0e152e 12%
+    );
+  background-blend-mode: hue, hard-light;
+  /* Vertical rolling gradient uses 200% width and 700% height for pronounced vertical movement */
+  background-size: 200% 700%, 300% 100%;
+  /* First gradient (vertical) scrolls only on Y-axis, second gradient uses both axes */
+  background-position: 0% var(--background-y),
+    var(--background-x) var(--background-y);
+  mix-blend-mode: lighten;
+  opacity: calc(
+    (0.3 * var(--card-opacity)) + var(--card-opacity) *
+      var(--pointer-from-center) * 0.5
+  );
+  filter: saturate(1.5);
+}
+
+/* VMAX Glare Layer (Flashlight Effect) */
+.card[data-rarity="rare holo vmax"] .card__glare {
+  mix-blend-mode: hard-light;
+  filter: brightness(1) contrast(1);
+  background-image: radial-gradient(
+    farthest-corner circle at var(--pointer-x) var(--pointer-y),
+    hsla(0, 0%, 100%, 0.5) 0%,
+    hsl(0, 0%, 0%) 120%
+  );
+  opacity: calc(
+    (0.15 * var(--card-opacity)) + var(--card-opacity) *
+      var(--pointer-from-center) * 0.5
+  );
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* VMAX No Mask Override */
+.card:not(.masked)[data-rarity="rare holo vmax"] .card__shine {
+  filter: brightness(calc((var(--pointer-from-center) * 0.4) + 0.4)) contrast(2)
+    saturate(1);
+}
+
+/* Grain Layer */
+.card__grain {
+  background-image: url("/img/grain.webp");
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: overlay;
+  opacity: 0.4;
+}
