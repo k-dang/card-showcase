@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef, useCallback, ReactNode, useEffect } from "react";
+import { type ReactNode, useCallback, useEffect, useRef } from "react";
 import "./HoloTiltCard.css";
+import "./HoloTiltCard.vmax.css";
 import { cn } from "@/lib/utils";
 
 /**
@@ -43,12 +44,12 @@ export default function HoloTiltCard({
     el.style.setProperty("--background-x", "50");
     el.style.setProperty("--background-y", "50");
     el.style.setProperty("--card-opacity", "0");
-    
+
     // Set custom foil variable if provided
     if (foil) {
       el.style.setProperty("--foil", foil);
     }
-    
+
     // Set custom mask variable if provided
     if (mask) {
       el.style.setProperty("--mask", mask);
@@ -123,8 +124,8 @@ export default function HoloTiltCard({
       el.style.setProperty("--background-y", `${backgroundY}%`);
       el.style.setProperty("--card-opacity", "1");
 
-      // card tilt - increased for more dramatic effect
-      const rotateX = (py - 0.5) * 45; // tilt forward/back
+      // card tilt - forward/back tilt increased to 60deg max
+      const rotateX = (py - 0.5) * 60; // tilt forward/back
       const rotateY = (0.5 - px) * 45; // tilt left/right
 
       el.style.setProperty("--rotateX", `${rotateX}deg`);

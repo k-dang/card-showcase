@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback, ReactNode } from "react";
+import { type ReactNode, useCallback, useRef } from "react";
 import "./TiltCard.css";
 
 /**
