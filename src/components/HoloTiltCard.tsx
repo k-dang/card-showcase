@@ -3,6 +3,7 @@
 import { type ReactNode, useCallback, useEffect, useRef } from "react";
 import "./HoloTiltCard.css";
 import "./HoloTiltCard.vmax.css";
+import "./HoloTiltCard.rainbow.css";
 import { cn } from "@/lib/utils";
 
 /**
@@ -172,6 +173,7 @@ export default function HoloTiltCard({
       onMouseLeave={handleMouseLeave}
       className={cn("card", masked && "masked")}
       data-rarity={rarity}
+      role="image"
     >
       {children}
       {shine && <div className="card__shine"></div>}
