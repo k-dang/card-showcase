@@ -41,6 +41,15 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  /* Showcase: fonts */
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  /* Showcase: animations */
+  --animate-fade-up: fade-up 0.7s ease both;
+  --animate-aurora-drift: aurora-drift 25s ease-in-out infinite alternate;
+  --animate-aurora-drift-reverse: aurora-drift 25s ease-in-out infinite
+    alternate-reverse;
+  --animate-glow-pulse: glow-pulse 4s ease-in-out infinite alternate;
 }
 
 :root {
@@ -107,9 +116,30 @@
   --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* ─── Showcase: gradient tokens ────────────────────────────────────────────── */
+:root {
+  --gradient-warm: conic-gradient(
+    hsl(2, 100%, 73%),
+    hsl(53, 100%, 69%),
+    hsl(93, 100%, 69%),
+    hsl(176, 100%, 76%),
+    hsl(228, 100%, 74%),
+    hsl(283, 100%, 73%),
+    hsl(2, 100%, 73%)
+  );
+  --gradient-cool: conic-gradient(
+    hsl(176, 100%, 76%),
+    hsl(210, 100%, 72%),
+    hsl(240, 100%, 74%),
+    hsl(270, 100%, 73%),
+    hsl(300, 80%, 70%),
+    hsl(176, 100%, 76%)
+  );
 }
 
 @layer base {
@@ -118,5 +148,44 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* ─── Keyframes ─────────────────────────────────────────────────────────────── */
+
+@keyframes aurora-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(20px, -15px) scale(1.03);
+  }
+  66% {
+    transform: translate(-15px, 20px) scale(0.97);
+  }
+  100% {
+    transform: translate(10px, -20px) scale(1.05);
+  }
+}
+
+@keyframes glow-pulse {
+  0% {
+    opacity: 0.15;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0.25;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

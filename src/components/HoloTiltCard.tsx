@@ -105,7 +105,7 @@ export default function HoloTiltCard({
       const centerY = py - 0.5;
       const pointerFromCenter = Math.min(
         Math.sqrt(centerX * centerX + centerY * centerY) * 2,
-        1
+        1,
       );
 
       // Background position adjustments
@@ -119,7 +119,7 @@ export default function HoloTiltCard({
       el.style.setProperty("--pointer-y", `${pointerY}%`);
       el.style.setProperty(
         "--pointer-from-center",
-        pointerFromCenter.toString()
+        pointerFromCenter.toString(),
       );
       el.style.setProperty("--background-x", `${backgroundX}%`);
       el.style.setProperty("--background-y", `${backgroundY}%`);

@@ -136,6 +136,7 @@ export default function TiltCard({ children }: TiltCardProps) {
   return (
     <div
       ref={ref}
+      role="img"
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
