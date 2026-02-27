@@ -34,6 +34,17 @@ export default function HoloTiltCard({
   const rafId = useRef<number | null>(null);
   const trackingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  const cancelPendingFramesAndTimers = useCallback(() => {
+    if (rafId.current !== null) {
+      cancelAnimationFrame(rafId.current);
+      rafId.current = null;
+    }
+    if (trackingTimeoutRef.current !== null) {
+      clearTimeout(trackingTimeoutRef.current);
+      trackingTimeoutRef.current = null;
+    }
+  }, []);
+
   // Initialize CSS variables on mount
   useEffect(() => {
     const el = ref.current;
@@ -56,6 +67,11 @@ export default function HoloTiltCard({
       el.style.setProperty("--mask", mask);
     }
   }, [foil, mask]);
+
+  // Cancel pending RAF/timeouts on unmount
+  useEffect(() => {
+    return cancelPendingFramesAndTimers;
+  }, [cancelPendingFramesAndTimers]);
 
   const handleMouseEnter = useCallback(() => {
     const el = ref.current;
@@ -141,17 +157,7 @@ export default function HoloTiltCard({
     const el = ref.current;
     if (!el) return;
 
-    // Cancel any pending animation frame
-    if (rafId.current !== null) {
-      cancelAnimationFrame(rafId.current);
-      rafId.current = null;
-    }
-
-    // Clear tracking timeout
-    if (trackingTimeoutRef.current !== null) {
-      clearTimeout(trackingTimeoutRef.current);
-      trackingTimeoutRef.current = null;
-    }
+    cancelPendingFramesAndTimers();
 
     // Remove tracking class to restore transition for smooth reset
     el.classList.remove("tracking");
@@ -163,7 +169,7 @@ export default function HoloTiltCard({
     el.style.setProperty("--translateY", "0px");
     el.style.setProperty("--card-scale", "1");
     el.style.setProperty("--card-opacity", "0");
-  }, []);
+  }, [cancelPendingFramesAndTimers]);
 
   return (
     <div
