@@ -6,6 +6,12 @@ import "./HoloTiltCard.vmax.css";
 import "./HoloTiltCard.rainbow.css";
 import { cn } from "@/lib/utils";
 
+function setCssVars(el: HTMLElement, vars: Record<string, string>) {
+  for (const [key, value] of Object.entries(vars)) {
+    el.style.setProperty(key, value);
+  }
+}
+
 /**
  * Props for the HoloTiltCard component.
  */
@@ -50,12 +56,14 @@ export default function HoloTiltCard({
     const el = ref.current;
     if (!el) return;
 
-    el.style.setProperty("--pointer-x", "50%");
-    el.style.setProperty("--pointer-y", "50%");
-    el.style.setProperty("--pointer-from-center", "0");
-    el.style.setProperty("--background-x", "50");
-    el.style.setProperty("--background-y", "50");
-    el.style.setProperty("--card-opacity", "0");
+    setCssVars(el, {
+      "--pointer-x": "50%",
+      "--pointer-y": "50%",
+      "--pointer-from-center": "0",
+      "--background-x": "50",
+      "--background-y": "50",
+      "--card-opacity": "0",
+    });
 
     // Set custom foil variable if provided
     if (foil) {
@@ -128,28 +136,25 @@ export default function HoloTiltCard({
       const backgroundX = px * 26 + 37;
       const backgroundY = py * 34 + 33;
 
-      // TODO: double check if necessary
-      el.style.setProperty("--px", px.toString());
-      el.style.setProperty("--py", py.toString());
-      el.style.setProperty("--pointer-x", `${pointerX}%`);
-      el.style.setProperty("--pointer-y", `${pointerY}%`);
-      el.style.setProperty(
-        "--pointer-from-center",
-        pointerFromCenter.toString(),
-      );
-      el.style.setProperty("--background-x", `${backgroundX}%`);
-      el.style.setProperty("--background-y", `${backgroundY}%`);
-      el.style.setProperty("--card-opacity", "1");
-
       // card tilt - forward/back tilt increased to 60deg max
       const rotateX = (py - 0.5) * 60; // tilt forward/back
       const rotateY = (0.5 - px) * 45; // tilt left/right
 
-      el.style.setProperty("--rotateX", `${rotateX}deg`);
-      el.style.setProperty("--rotateY", `${rotateY}deg`);
-      el.style.setProperty("--translateX", "0px");
-      el.style.setProperty("--translateY", "0px");
-      el.style.setProperty("--card-scale", "1");
+      setCssVars(el, {
+        "--px": px.toString(),
+        "--py": py.toString(),
+        "--pointer-x": `${pointerX}%`,
+        "--pointer-y": `${pointerY}%`,
+        "--pointer-from-center": pointerFromCenter.toString(),
+        "--background-x": `${backgroundX}%`,
+        "--background-y": `${backgroundY}%`,
+        "--card-opacity": "1",
+        "--rotateX": `${rotateX}deg`,
+        "--rotateY": `${rotateY}deg`,
+        "--translateX": "0px",
+        "--translateY": "0px",
+        "--card-scale": "1",
+      });
     });
   }, []);
 
@@ -163,12 +168,14 @@ export default function HoloTiltCard({
     el.classList.remove("tracking");
 
     // Reset all transform properties
-    el.style.setProperty("--rotateX", "0deg");
-    el.style.setProperty("--rotateY", "0deg");
-    el.style.setProperty("--translateX", "0px");
-    el.style.setProperty("--translateY", "0px");
-    el.style.setProperty("--card-scale", "1");
-    el.style.setProperty("--card-opacity", "0");
+    setCssVars(el, {
+      "--rotateX": "0deg",
+      "--rotateY": "0deg",
+      "--translateX": "0px",
+      "--translateY": "0px",
+      "--card-scale": "1",
+      "--card-opacity": "0",
+    });
   }, [cancelPendingFramesAndTimers]);
 
   return (
