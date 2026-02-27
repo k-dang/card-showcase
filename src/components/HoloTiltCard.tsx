@@ -6,6 +6,8 @@ import "./HoloTiltCard.vmax.css";
 import "./HoloTiltCard.rainbow.css";
 import { cn } from "@/lib/utils";
 
+export type CardRarity = "rare holo vmax" | "rare rainbow";
+
 function setCssVars(el: HTMLElement, vars: Record<string, string>) {
   for (const [key, value] of Object.entries(vars)) {
     el.style.setProperty(key, value);
@@ -17,7 +19,7 @@ function setCssVars(el: HTMLElement, vars: Record<string, string>) {
  */
 interface HoloTiltCardProps {
   children: ReactNode;
-  rarity?: string;
+  rarity?: CardRarity;
   masked?: boolean;
   shine?: boolean;
   glare?: boolean;
@@ -38,7 +40,7 @@ export default function HoloTiltCard({
 }: HoloTiltCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const rafId = useRef<number | null>(null);
-  const trackingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const trackingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const cancelPendingFramesAndTimers = useCallback(() => {
     if (rafId.current !== null) {

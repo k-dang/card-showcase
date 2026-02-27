@@ -30,7 +30,7 @@ const cardData = [
     glowClasses: "bg-[var(--gradient-cool)] opacity-[0.15]",
     effectLabel: "Rare Rainbow",
   },
-];
+] as const;
 
 export default function Home() {
   return (
