@@ -1,5 +1,20 @@
 import Image from "next/image";
-import HoloTiltCard from "@/components/HoloTiltCard";
+import HoloTiltCard, { type CardRarity } from "@/components/HoloTiltCard";
+
+interface ShowcaseCard {
+  id: number;
+  name: string;
+  imageUrl: string;
+  rarity: CardRarity;
+  foil?: string;
+  mask?: string;
+  masked: boolean;
+  shine: boolean;
+  glare: boolean;
+  grain: boolean;
+  glowClasses: string;
+  effectLabel: string;
+}
 
 const cardData = [
   {
@@ -30,7 +45,21 @@ const cardData = [
     glowClasses: "bg-[var(--gradient-cool)] opacity-[0.15]",
     effectLabel: "Rare Rainbow",
   },
-] as const;
+  {
+    id: 3,
+    name: "Pikachu",
+    imageUrl: "https://images.pokemontcg.io/swsh11tg/TG05_hires.png",
+    rarity: "trainer gallery rare holo",
+    foil: "tg05_foil_holo_rainbow_2x.webp",
+    mask: "tg05_foil_holo_rainbow_2x.webp",
+    masked: true,
+    shine: true,
+    glare: true,
+    grain: false,
+    glowClasses: "bg-[var(--gradient-warm)] opacity-[0.16]",
+    effectLabel: "Trainer Gallery Rare Holo",
+  },
+] satisfies ReadonlyArray<ShowcaseCard>;
 
 export default function Home() {
   return (

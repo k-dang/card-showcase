@@ -4,9 +4,13 @@ import { type ReactNode, useCallback, useEffect, useRef } from "react";
 import "./HoloTiltCard.css";
 import "./HoloTiltCard.vmax.css";
 import "./HoloTiltCard.rainbow.css";
+import "./HoloTiltCard.trainer-gallery.css";
 import { cn } from "@/lib/utils";
 
-export type CardRarity = "rare holo vmax" | "rare rainbow";
+export type CardRarity =
+  | "rare holo vmax"
+  | "rare rainbow"
+  | "trainer gallery rare holo";
 
 function setCssVars(el: HTMLElement, vars: Record<string, string>) {
   for (const [key, value] of Object.entries(vars)) {

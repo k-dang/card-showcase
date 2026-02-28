@@ -3,10 +3,9 @@
   Based on: https://github.com/simeydotme/pokemon-cards-css/blob/main/public/css/cards/rainbow-holo.css
 */
 
-/* ==================== SHINE LAYERS ==================== */
+/* ==================== SHINE LAYER ==================== */
 
 .card[data-rarity="rare rainbow"] .card__shine {
-  /* Rainbow color stops */
   --r-clr-1: hsl(0, 57%, 37%);
   --r-clr-2: hsl(40, 53%, 39%);
   --r-clr-3: hsl(90, 60%, 35%);
@@ -14,13 +13,9 @@
   --r-clr-5: hsl(180, 60%, 35%);
   --r-clr-6: hsl(210, 57%, 39%);
   --r-clr-7: hsl(280, 55%, 31%);
-
-  /* Local defaults for shared vars */
   --glitter: url("/img/glitter.png");
   --glittersize: 3.5%;
   --imgsize: cover;
-
-  /* Pointer mapping (use values set by JS) */
   --pointer-from-left: var(--px, 0.5);
   --pointer-from-top: var(--py, 0.5);
 
@@ -69,12 +64,12 @@
     contrast(2.2) saturate(0.75);
 }
 
-.card[data-rarity="rare rainbow"] .card__shine:after {
-  content: "";
+/* ==================== SHINE :AFTER ==================== */
 
-  /* Shared vars (inherit from parent) */
+.card[data-rarity="rare rainbow"] .card__shine:after {
   --glitter: url("/img/glitter.png");
   --glittersize: 3.5%;
+  content: "";
 
   background-image:
     var(--glitter),
@@ -119,6 +114,8 @@
   mix-blend-mode: color-dodge;
 }
 
+/* ==================== SHINE :BEFORE ==================== */
+
 .card[data-rarity="rare rainbow"] .card__shine:before {
   content: "";
 
@@ -127,13 +124,12 @@
   background-position: center center;
 
   filter: brightness(2.5) contrast(1);
-  opacity: calc((var(--pointer-from-center) + 0.4) * 0.6);
-
   background-blend-mode: difference;
   mix-blend-mode: darken;
+  opacity: calc((var(--pointer-from-center) + 0.4) * 0.6);
 }
 
-/* ==================== GLARE LAYERS ==================== */
+/* ==================== GLARE LAYER ==================== */
 
 .card[data-rarity="rare rainbow"] .card__glare {
   background-image: radial-gradient(
