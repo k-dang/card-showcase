@@ -142,6 +142,8 @@ export default function HoloTiltCard({
       const rotateX = (py - 0.5) * 60; // tilt forward/back
       const rotateY = (0.5 - px) * 45; // tilt left/right
 
+      // --px/--py: normalized pointer position (0–1), consumed by
+      // HoloTiltCard.rainbow.css (pointer-from-left/top) and TiltCard.css (shine gradient).
       setCssVars(el, {
         "--px": px.toString(),
         "--py": py.toString(),
