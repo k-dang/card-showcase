@@ -7,6 +7,7 @@ interface ShowcaseCard {
   imageUrl: string;
   rarity: CardRarity;
   cardClassName?: string;
+  supertype?: string;
   subtypes?: string;
   foil?: string;
   mask?: string;
@@ -92,6 +93,22 @@ const cardData = [
     glowClasses: "bg-[var(--gradient-warm)] opacity-[0.18]",
     effectLabel: "Rare Holo VSTAR",
   },
+  {
+    id: 6,
+    name: "Nessa",
+    imageUrl: "https://images.pokemontcg.io/swsh11tg/TG27_hires.png",
+    rarity: "rare ultra",
+    supertype: "trainer",
+    subtypes: "supporter",
+    foil: "tg27_foil_etched_sunpillar_2x.webp",
+    mask: "tg27_foil_etched_sunpillar_2x.webp",
+    masked: true,
+    shine: true,
+    glare: true,
+    grain: false,
+    glowClasses: "bg-[var(--gradient-warm)] opacity-[0.17]",
+    effectLabel: "Rare Ultra Trainer",
+  },
 ] satisfies ReadonlyArray<ShowcaseCard>;
 
 export default function Home() {
@@ -157,6 +174,7 @@ export default function Home() {
                 <HoloTiltCard
                   rarity={card.rarity}
                   className={card.cardClassName}
+                  supertype={card.supertype}
                   subtypes={card.subtypes}
                   masked={card.masked}
                   shine={card.shine}

@@ -7,11 +7,13 @@ import "./HoloTiltCard.vstar.css";
 import "./HoloTiltCard.rainbow.css";
 import "./HoloTiltCard.rainbow-alt.css";
 import "./HoloTiltCard.trainer-gallery.css";
+import "./HoloTiltCard.rare-ultra.css";
 import { cn } from "@/lib/utils";
 
 export type CardRarity =
   | "rare holo vmax"
   | "rare holo vstar"
+  | "rare ultra"
   | "rare rainbow"
   | "rare rainbow alt"
   | "trainer gallery rare holo";
@@ -29,6 +31,7 @@ interface HoloTiltCardProps {
   children: ReactNode;
   rarity?: CardRarity;
   className?: string;
+  supertype?: string;
   subtypes?: string;
   masked?: boolean;
   shine?: boolean;
@@ -42,6 +45,7 @@ export default function HoloTiltCard({
   children,
   rarity,
   className,
+  supertype,
   subtypes,
   masked,
   shine,
@@ -202,6 +206,7 @@ export default function HoloTiltCard({
       onMouseLeave={handleMouseLeave}
       className={cn("card", masked && "masked", className)}
       data-rarity={rarity}
+      data-supertype={supertype}
       data-subtypes={subtypes}
       role="image"
     >

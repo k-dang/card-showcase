@@ -1,0 +1,118 @@
+/*
+  RARE ULTRA (TRAINER SUPPORTER)
+  Adapted from:
+  - https://github.com/simeydotme/pokemon-cards-css/blob/main/public/css/cards/v-full-art.css
+  - https://github.com/simeydotme/pokemon-cards-css/blob/main/public/css/cards/trainer-full-art.css
+*/
+
+.card[data-subtypes*="supporter"][data-rarity="rare ultra"] .card__shine,
+.card[data-subtypes*="supporter"][data-rarity="rare ultra"] .card__shine:after {
+  --space: 5%;
+  --angle: 133deg;
+  --imgsize: cover;
+
+  background-image:
+    var(--foil),
+    repeating-linear-gradient(
+      0deg,
+      var(--sunpillar-clr-1) calc(var(--space) * 1),
+      var(--sunpillar-clr-2) calc(var(--space) * 2),
+      var(--sunpillar-clr-3) calc(var(--space) * 3),
+      var(--sunpillar-clr-4) calc(var(--space) * 4),
+      var(--sunpillar-clr-5) calc(var(--space) * 5),
+      var(--sunpillar-clr-6) calc(var(--space) * 6),
+      var(--sunpillar-clr-1) calc(var(--space) * 7)
+    ),
+    repeating-linear-gradient(
+      var(--angle),
+      #0e152e 0%,
+      hsl(180, 10%, 60%) 3.8%,
+      hsl(180, 29%, 66%) 4.5%,
+      hsl(180, 10%, 60%) 5.2%,
+      #0e152e 10%,
+      #0e152e 12%
+    ),
+    radial-gradient(
+      farthest-corner circle at var(--pointer-x) var(--pointer-y),
+      hsla(0, 0%, 0%, 0.1) 12%,
+      hsla(0, 0%, 0%, 0.15) 20%,
+      hsla(0, 0%, 0%, 0.25) 120%
+    );
+
+  background-position:
+    center center,
+    0% var(--background-y),
+    calc(var(--background-x) + (var(--background-y) * 0.2)) var(--background-y),
+    var(--background-x) var(--background-y);
+  background-blend-mode: soft-light, hue, hard-light;
+  background-size:
+    var(--imgsize),
+    200% 700%,
+    300% 100%,
+    200% 100%;
+  filter: brightness(calc((var(--pointer-from-center) * 0.05) + 0.8))
+    contrast(1.75) saturate(1.2);
+}
+
+.card[data-subtypes*="supporter"][data-rarity="rare ultra"] .card__shine:after {
+  content: "";
+
+  background-position:
+    center center,
+    0% var(--background-y),
+    calc((var(--background-x) + (var(--background-y) * 0.2)) * -1)
+    calc(var(--background-y) * -1),
+    var(--background-x) var(--background-y);
+  background-size:
+    var(--imgsize),
+    200% 400%,
+    195% 100%,
+    200% 100%;
+  filter: brightness(calc((var(--pointer-from-center) * 0.4) + 0.85))
+    contrast(2) saturate(0.5);
+  mix-blend-mode: exclusion;
+}
+
+.card[data-subtypes*="supporter"][data-rarity="rare ultra"]
+  .card__shine:before {
+  content: "";
+  -webkit-mask-image: none;
+  mask-image: none;
+  background-image: radial-gradient(
+    farthest-corner circle at var(--pointer-x) var(--pointer-y),
+    hsl(0, 0%, 100%) 0%,
+    hsla(0, 0%, 0%, 0) 80%
+  );
+  background-position: center;
+  background-size: cover;
+  mix-blend-mode: screen;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.card[data-rarity="rare ultra"][data-subtypes*="supporter"] .card__glare {
+  background-image: radial-gradient(
+    farthest-corner circle at var(--pointer-x) var(--pointer-y),
+    hsl(0, 0%, 75%) 5%,
+    hsl(200, 5%, 35%) 60%,
+    hsl(320, 40%, 10%) 150%
+  );
+  background-size: 170% 170%;
+  background-position: center center;
+  filter: brightness(1.5) contrast(1.4) saturate(1);
+  mix-blend-mode: multiply;
+  opacity: calc(var(--card-opacity) * 0.75);
+}
+
+.card:not(.masked)[data-subtypes*="supporter"][data-rarity="rare ultra"]
+  .card__shine,
+.card:not(.masked)[data-subtypes*="supporter"][data-rarity="rare ultra"]
+  .card__shine:after {
+  --mask: none;
+  --foil: url("/img/trainerbg.png");
+  --imgsize: 20%;
+
+  background-blend-mode: color-burn, hue, hard-light;
+  filter: brightness(calc((var(--pointer-from-center) * 0.05) + 0.6))
+    contrast(1.5) saturate(1.2);
+}
