@@ -6,6 +6,8 @@ interface ShowcaseCard {
   name: string;
   imageUrl: string;
   rarity: CardRarity;
+  cardClassName?: string;
+  subtypes?: string;
   foil?: string;
   mask?: string;
   masked: boolean;
@@ -47,6 +49,22 @@ const cardData = [
   },
   {
     id: 3,
+    name: "Umbreon",
+    imageUrl: "https://images.pokemontcg.io/swsh7/215_hires.png",
+    rarity: "rare rainbow alt",
+    cardClassName: "darkness interactive",
+    subtypes: "vmax single strike",
+    foil: "215_foil_etched_swsecret_2x.webp",
+    mask: "215_foil_etched_swsecret_2x.webp",
+    masked: true,
+    shine: true,
+    glare: true,
+    grain: false,
+    glowClasses: "bg-[var(--gradient-cool)] opacity-[0.15]",
+    effectLabel: "Rare Rainbow Alt",
+  },
+  {
+    id: 4,
     name: "Pikachu",
     imageUrl: "https://images.pokemontcg.io/swsh11tg/TG05_hires.png",
     rarity: "trainer gallery rare holo",
@@ -123,6 +141,8 @@ export default function Home() {
               <div className="relative z-1">
                 <HoloTiltCard
                   rarity={card.rarity}
+                  className={card.cardClassName}
+                  subtypes={card.subtypes}
                   masked={card.masked}
                   shine={card.shine}
                   glare={card.glare}

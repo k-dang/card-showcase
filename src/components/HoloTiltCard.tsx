@@ -4,12 +4,14 @@ import { type ReactNode, useCallback, useEffect, useRef } from "react";
 import "./HoloTiltCard.css";
 import "./HoloTiltCard.vmax.css";
 import "./HoloTiltCard.rainbow.css";
+import "./HoloTiltCard.rainbow-alt.css";
 import "./HoloTiltCard.trainer-gallery.css";
 import { cn } from "@/lib/utils";
 
 export type CardRarity =
   | "rare holo vmax"
   | "rare rainbow"
+  | "rare rainbow alt"
   | "trainer gallery rare holo";
 
 function setCssVars(el: HTMLElement, vars: Record<string, string>) {
@@ -24,6 +26,8 @@ function setCssVars(el: HTMLElement, vars: Record<string, string>) {
 interface HoloTiltCardProps {
   children: ReactNode;
   rarity?: CardRarity;
+  className?: string;
+  subtypes?: string;
   masked?: boolean;
   shine?: boolean;
   glare?: boolean;
@@ -35,6 +39,8 @@ interface HoloTiltCardProps {
 export default function HoloTiltCard({
   children,
   rarity,
+  className,
+  subtypes,
   masked,
   shine,
   glare,
@@ -192,8 +198,9 @@ export default function HoloTiltCard({
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={cn("card", masked && "masked")}
+      className={cn("card", masked && "masked", className)}
       data-rarity={rarity}
+      data-subtypes={subtypes}
       role="image"
     >
       {children}

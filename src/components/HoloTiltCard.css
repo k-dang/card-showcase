@@ -1,6 +1,12 @@
 /* Base Card Styles */
 .card {
   --card-radius: 4.55% / 3.5%;
+  --grain: url("/img/grain.webp");
+  --glitter: url("/img/glitter.png");
+  --glittersize: 25%;
+  --space: 5%;
+  --angle: 133deg;
+  --imgsize: cover;
   --sunpillar-1: hsl(2, 100%, 73%);
   --sunpillar-2: hsl(53, 100%, 69%);
   --sunpillar-3: hsl(93, 100%, 69%);
@@ -19,6 +25,10 @@
   backface-visibility: hidden;
   will-change: transform;
   transition: transform 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card.darkness {
+  --card-glow: hsl(189, 77%, 27%);
 }
 
 .card:hover {
@@ -77,6 +87,7 @@
   transform: translateZ(1.41px);
   transition: opacity 0.2s ease-out;
   will-change: opacity, background-image;
+  mix-blend-mode: overlay;
 }
 
 /* Grain Layer */
