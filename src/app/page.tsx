@@ -77,6 +77,21 @@ const cardData = [
     glowClasses: "bg-[var(--gradient-warm)] opacity-[0.16]",
     effectLabel: "Trainer Gallery Rare Holo",
   },
+  {
+    id: 5,
+    name: "Charizard VSTAR",
+    imageUrl: "https://images.pokemontcg.io/swsh9/18_hires.png",
+    rarity: "rare holo vstar",
+    subtypes: "vstar",
+    foil: "018_foil_etched_sunpillar_2x.webp",
+    mask: "018_foil_etched_sunpillar_2x.webp",
+    masked: true,
+    shine: true,
+    glare: true,
+    grain: false,
+    glowClasses: "bg-[var(--gradient-warm)] opacity-[0.18]",
+    effectLabel: "Rare Holo VSTAR",
+  },
 ] satisfies ReadonlyArray<ShowcaseCard>;
 
 export default function Home() {

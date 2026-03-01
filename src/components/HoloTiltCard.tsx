@@ -3,6 +3,7 @@
 import { type ReactNode, useCallback, useEffect, useRef } from "react";
 import "./HoloTiltCard.css";
 import "./HoloTiltCard.vmax.css";
+import "./HoloTiltCard.vstar.css";
 import "./HoloTiltCard.rainbow.css";
 import "./HoloTiltCard.rainbow-alt.css";
 import "./HoloTiltCard.trainer-gallery.css";
@@ -10,6 +11,7 @@ import { cn } from "@/lib/utils";
 
 export type CardRarity =
   | "rare holo vmax"
+  | "rare holo vstar"
   | "rare rainbow"
   | "rare rainbow alt"
   | "trainer gallery rare holo";
