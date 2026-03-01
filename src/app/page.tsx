@@ -49,7 +49,7 @@ const cardData = [
   },
   {
     id: 3,
-    name: "Umbreon",
+    name: "Umbreon VMAX",
     imageUrl: "https://images.pokemontcg.io/swsh7/215_hires.png",
     rarity: "rare rainbow alt",
     cardClassName: "darkness interactive",
@@ -86,8 +86,8 @@ export default function Home() {
         className="fixed inset-0 pointer-events-none z-0 overflow-hidden"
         aria-hidden="true"
       >
-        <div className="absolute rounded-full w-[600px] h-[600px] left-[8%] top-[20%] bg-[var(--gradient-warm)] blur-[80px] opacity-[0.12] animate-aurora-drift" />
-        <div className="absolute rounded-full w-[500px] h-[500px] right-[8%] top-[25%] bg-[var(--gradient-cool)] blur-[80px] opacity-[0.1] animate-aurora-drift-reverse" />
+        <div className="absolute rounded-full w-[600px] h-[600px] left-[8%] top-[20%] bg-(--gradient-warm) blur-[80px] opacity-[0.12] animate-aurora-drift" />
+        <div className="absolute rounded-full w-[500px] h-[500px] right-[8%] top-[25%] bg-(--gradient-cool) blur-[80px] opacity-[0.1] animate-aurora-drift-reverse" />
       </div>
 
       <div className="relative z-1 min-h-svh flex flex-col items-center justify-center gap-10 px-8 py-16">
@@ -127,7 +127,7 @@ export default function Home() {
         </div>
 
         <section
-          className="flex flex-row gap-20 items-start animate-fade-up"
+          className="grid grid-cols-3 gap-20 animate-fade-up"
           style={{ animationDelay: "0.4s" }}
         >
           {cardData.map((card) => (
